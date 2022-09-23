@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ergie.Views.SettingsView"
+             Title="SettingsView"
+             BackgroundColor="{DynamicResource BackgroundColor}"
+             Padding="10"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout>
+        <Grid ColumnDefinitions="*, Auto" Margin="0, 10, 0, 0">
+
+            <Label Text="Dark Mode:"
+                   TextColor="{DynamicResource TextColor}"
+                   FontSize="18"
+                   VerticalOptions="Center"
+                   Grid.Column="0"/>
+
+            <CheckBox x:Name="DarkModeCheckBox"
+                      CheckedChanged="OnToggle"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center"
+                      Grid.Column="1"
+                      Color="Gray"/>
+        </Grid>
+
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="*"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill"
+              Padding="0, 10, 0, 10"
+              Margin="0, 10, 0, 10">
+            <Button BackgroundColor="Transparent"
+                    Clicked="GoToSavedTagsPage"/>
+            <Label Text="Saved Tags"
+                   TextColor="{DynamicResource TextColor}"
+                   FontSize="18"
+                   VerticalOptions="Center"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

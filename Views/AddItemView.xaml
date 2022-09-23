@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Ergie.Models"
+             xmlns:converter="clr-namespace:Ergie.Converter"
+             xmlns:local="clr-namespace:Ergie"
+             xmlns:viewmodel="clr-namespace:Ergie.ViewModels"
+			 x:Class="Ergie.Views.AddItemView"
+			 Title="Add Item"
+			 BackgroundColor="{DynamicResource BackgroundColor}"
+             Padding="10"
+             x:DataType="viewmodel:FlagViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:StringToColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="100, *, 100" Margin="0, 10, 0, 20">
+                <Label Text="Title:" HorizontalOptions="Start" FontSize="18" Grid.Column="0" TextColor="{DynamicResource TextColor}"/>
+                <Button x:Name="AddItemButton" IsEnabled="False" Text="Add" WidthRequest="100" CornerRadius="10" Padding="10, 3, 10, 3" Grid.Column="2" BackgroundColor="{DynamicResource ButtonDisabledColor}" TextColor="{DynamicResource TextColor}" Clicked="CreateItem"/>
+            </Grid>
+
+            <!--Title-->
+            <Border StrokeThickness="0" StrokeShape="RoundRectangle 20" Padding="10, 0, 10, 0" Margin="0, 0, 0, 20"  BackgroundColor="{DynamicResource TextFieldBGColor}">
+                <Entry x:Name="ItemTitle" ClearButtonVisibility="WhileEditing" TextChanged="TitleChanged" Placeholder="Title description" BackgroundColor="Transparent" MaxLength="256" Margin="0, 0, 0, 0" Grid.ColumnSpan="3" TextColor="{DynamicResource TextColor}"/>
+            </Border>
+
+            <!--Description-->
+            
+            <Border StrokeThickness="0" StrokeShape="RoundRectangle 20" Padding="10, 10, 20, 0" Margin="0, 0, 0, 20" BackgroundColor="{DynamicResource TextFieldBGColor}">
+                <Editor x:Name="ItemDesc"
+                        MaxLength="256"
+                        Placeholder="Longer description."
+                        AutoSize="TextChanges"
+                        BackgroundColor="Transparent"
+                        Margin="10, 0, 0, 0"
+                        HeightRequest="150"
+                        HorizontalOptions="Fill"
+                        TextColor="{DynamicResource TextColor}"/>
+            </Border>
+
+            <!--Tags-->
+            <Label Text="Tags:" HorizontalOptions="Start" FontSize="18" Margin="0, 0, 0, 20" TextColor="{DynamicResource TextColor}"/>
+            <CollectionView x:Name="FlagListView" ItemsLayout="VerticalGrid, 3" Margin="0, 0, 0, 20">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Flag">
+                        <Button CommandParameter="{Binding .}"
+                                Clicked="RemoveFlag"
+                                Text="{Binding Name}"
+                                Padding="10, 3, 10, 3"
+                                Margin="5"
+                                BackgroundColor="{Binding Color, Converter={StaticResource ColorConverter}}"
+                                TextColor="{DynamicResource TextColor}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--Saved Tags-->
+            <Label Text="Saved Tags:" HorizontalOptions="Start" FontSize="18" Margin="0, 0, 0, 20" TextColor="{DynamicResource TextColor}"/>
+            <CollectionView x:Name="SavedFlagView" ItemsSource="{Binding Flags}" ItemsLayout="VerticalGrid, 3" Margin="0, 0, 0, 20">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Flag">
+                        <Button CommandParameter="{Binding .}"
+                                Clicked="AddFlag"
+                                Text="{Binding Name}"
+                                Padding="10, 3, 10, 3"
+                                Margin="5"
+                                BackgroundColor="{Binding Color, Converter={StaticResource ColorConverter}}"
+                                TextColor="White"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--Custom Tag-->
+            <Label Text="Add New Tag:" HorizontalOptions="Start" FontSize="18" Margin="0, 0, 0, 20" TextColor="{DynamicResource TextColor}"/>
+            <Grid ColumnDefinitions="200, *, *">
+                <Border Grid.Column="0" HeightRequest="40" StrokeThickness="0" StrokeShape="RoundRectangle 20" Padding="10, 0, 10, 0" BackgroundColor="{DynamicResource TextFieldBGColor}">
+                    <Entry x:Name="CustomFlagName" ClearButtonVisibility="WhileEditing" TextChanged="CustomFlagNameChanged" Placeholder="Flag Name" BackgroundColor="Transparent" MaxLength="10" TextColor="{DynamicResource TextColor}"/>
+                </Border>
+                <Button x:Name="CustomFlagColorBtn" CornerRadius="15" Clicked="PickColor" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="40" WidthRequest="40" BackgroundColor="#0099FF" Grid.Column="1" />
+                <Button x:Name="CustomFlagAddBtn" Clicked="AddCustomFlag" IsEnabled="False" BackgroundColor="{DynamicResource ButtonDisabledColor}" TextColor="{DynamicResource TextColor}" Text="Add" HeightRequest="40" Grid.Column="2" CornerRadius="20" VerticalOptions="Center" HorizontalOptions="Fill"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

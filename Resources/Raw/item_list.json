@@ -1,0 +1,30 @@
+[
+  {
+    "complete": true,
+    "text": "item 1",
+    "flags": [
+      "MyFlag"
+    ]
+  },
+  {
+    "complete": false,
+    "text": "item 2",
+    "flags": [
+      "MyFlag"
+    ]
+  },
+  {
+    "complete": false,
+    "text": "Clicking on a tag brings up a list of all items with that tag.",
+    "flags": [
+      "MyFlag"
+    ]
+  },
+  {
+    "complete": false,
+    "text": "Clicking on a item brings up a new page that shows you the full description, what tags are already applied to that item, and all the tags that can be applied to it. Clicking tags adds/removes them.",
+    "flags": [
+      "MyFlag"
+    ]
+  }
+]

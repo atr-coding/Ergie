@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ergie.ColorPicker"
+             Title="ColorPicker"
+             Padding="10"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+    <VerticalStackLayout>
+        <Grid ColumnDefinitions="100, *, 100" RowDefinitions="*, *, *, *, *, *, *, *">
+            
+            <Frame x:Name="ColorPreview"
+                   Grid.ColumnSpan="3"
+                   Grid.Row="0"
+                   HorizontalOptions="Fill"
+                   HeightRequest="300"
+                   BackgroundColor="Black"
+                   Margin="0, 0, 0, 20"
+                   BorderColor="Black">
+                <Label Text="Sample Text" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Frame>
+            
+            <Label x:Name="RedLabel" Grid.Column="0" Grid.Row="1" Text="Red" TextColor="{DynamicResource TextColor}" FontSize="18" Margin="0, 0, 0, 20"/>
+            <Label x:Name="RedValueLabel" Grid.Column="3" Grid.Row="1" HorizontalOptions="End" Text="0" TextColor="{DynamicResource TextColor}" FontSize="18" Margin="0, 0, 0, 20"/>
+            <Slider x:Name="RedSlider" Grid.ColumnSpan="3" Grid.Row="2" Minimum="0" Maximum="255" ValueChanged="SliderChange" Margin="0, 0, 0, 20"/>
+
+            <Label x:Name="GreenLabel" Grid.Column="0" Grid.Row="3" Text="Green" TextColor="{DynamicResource TextColor}" FontSize="18" Margin="0, 0, 0, 20"/>
+            <Label x:Name="GreenValueLabel" Grid.Column="3" Grid.Row="3" HorizontalOptions="End" Text="0" TextColor="{DynamicResource TextColor}" FontSize="18" Margin="0, 0, 0, 20"/>
+            <Slider x:Name="GreenSlider" Grid.ColumnSpan="3" Grid.Row="4" Minimum="0" Maximum="255" ValueChanged="SliderChange" Margin="0, 0, 0, 20"/>
+
+            <Label x:Name="BlueLabel" Grid.Column="0" Grid.Row="5" Text="Blue" TextColor="{DynamicResource TextColor}" FontSize="18" Margin="0, 0, 0, 20"/>
+            <Label x:Name="BlueValueLabel" Grid.Column="3" Grid.Row="5" HorizontalOptions="End" Text="0" TextColor="{DynamicResource TextColor}" FontSize="18" Margin="0, 0, 0, 20"/>
+            <Slider x:Name="BlueSlider" Grid.ColumnSpan="3" Grid.Row="6" Minimum="0" Maximum="255" ValueChanged="SliderChange"/>
+
+            <Button Clicked="SelectColor" Text="Select Color" TextColor="{DynamicResource ButtonTextColor}" BackgroundColor="{DynamicResource ButtonBGColor}" Grid.ColumnSpan="3" Grid.Row="7" HorizontalOptions="Fill" Margin="0, 40, 0, 0"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

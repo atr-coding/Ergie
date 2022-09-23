@@ -1,0 +1,27 @@
+{
+  "home": "list1",
+  "flags": [
+    {
+      "Name": "MyFlag",
+      "Color": "#0099FF"
+    }
+  ],
+  "todolists": [
+    {
+      "name": "list1",
+      "items": [
+        {
+          "complete": true,
+          "title": "item 1",
+          "description": "long description",
+          "flags": [
+            {
+              "Name": "MyFlag",
+              "Color": "#0099FF"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

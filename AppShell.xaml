@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Ergie.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Ergie"
+    xmlns:views="clr-namespace:Ergie.Views"
+    FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarBackgroundColor="{DynamicResource TabBarBGColor}"
+    Shell.TabBarUnselectedColor="{DynamicResource TabUnselectedColor}"
+    Shell.TabBarTitleColor="{DynamicResource TabSelectedColor}">
+
+    <FlyoutItem>
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ItemView}"
+                          Route="Home" />
+        </Tab>
+
+        <ShellContent Title="Add Item" Icon="plus.png" ContentTemplate="{DataTemplate views:AddItemView}"/>
+        <ShellContent Title="Lists" Icon="list.png" ContentTemplate="{DataTemplate views:ListView}"/>
+        <ShellContent Title="Settings" Icon="settings.png" ContentTemplate="{DataTemplate views:SettingsView}"/>
+    </FlyoutItem>
+
+</Shell>

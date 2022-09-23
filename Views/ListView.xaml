@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Ergie.ViewModels"
+             xmlns:models="clr-namespace:Ergie.Models"
+             xmlns:views="clr-namespace:Ergie.Views"
+             x:Class="Ergie.Views.ListView"
+             Title="ListView"
+             x:DataType="viewmodels:ListViewModel"
+             Padding="10"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    
+    <VerticalStackLayout>
+        <Grid ColumnDefinitions="*,*">
+            <Button Text="Add"
+                    Padding="10, 5, 10, 5"
+                    BackgroundColor="MediumAquamarine"
+                    WidthRequest="100"
+                    VerticalOptions="Center"
+                    Grid.Column="0"
+                    HorizontalOptions="Start"
+                    Clicked="CreateList"/>
+            <Button Text="Delete"
+                    Padding="10, 5, 10, 5"
+                    BackgroundColor="{DynamicResource ButtonDisabledColor}"
+                    WidthRequest="100"
+                    VerticalOptions="Center"
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    Clicked="ToggleDelete"/>
+        </Grid>
+        <CollectionView x:Name="ListCollectionView"
+                        ItemsSource="{Binding TodoLists}"
+                        SelectionMode="Single"
+                        SelectionChanged="SelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:TodoList">
+                    <Grid Padding="0, 20, 0, 20"
+                          ColumnDefinitions="*, Auto">
+                        <Label Text="{Binding Name}"
+                               FontSize="18"
+                               TextColor="{DynamicResource TextColor}"
+                               Grid.Column="0"/>
+
+                        <Button Grid.Column="1"
+                                HorizontalOptions="End"
+                                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type views:ListView}}, Path=ListViewModel.ShowDeleteButtons}"
+                                IsEnabled="{Binding IsVisible, Source={RelativeSource Self}}"
+                                Text="Delete"
+                                FontSize="16"
+                                TextColor="{DynamicResource ButtonDisabledColor}"
+                                Padding="0"
+                                BackgroundColor="{DynamicResource BackgroundColor}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type views:ListView}}, Path=BindingContext.DeleteCommand}"
+                                CommandParameter="{Binding}"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
